@@ -175,8 +175,8 @@ app.post('/ai/search-url', async (req, res) => {
         const imageBase64 = Buffer.from(imageResponse.data).toString('base64');
         const mimeType = imageResponse.headers['content-type'] || 'image/jpeg';
 
-        // Thử với các models khác nhau
-        const models = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'];
+        // Fallback models - khi hết token sẽ tự động chuyển sang model khác
+        const models = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-robotics-er-1.5-preview'];
         let result = null;
         let lastError = null;
 
