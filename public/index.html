@@ -4,81 +4,54 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-    <title>Video Downloader Pro - Tải Video + AI Search</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        "paper-base": "#FDFBF7",
-                        "note-yellow": "#FFF7AE",
-                        "note-pink": "#FFB3BA",
-                        "note-green": "#B0E7BF",
-                        "note-blue": "#B9F0F0",
-                        "text-dark": "#333333",
-                        "text-muted": "#6B6B6B",
-                    },
-                    fontFamily: { "body": ["Nunito", "sans-serif"] },
-                },
-            },
-        }
-    </script>
+    <title>Video Downloader Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <style>
         body {
             background-color: #FDFBF7;
+            font-family: 'Nunito', sans-serif;
         }
 
         .card {
-            border: 2px solid #333333;
+            border: 2px solid #333;
             border-radius: 12px;
-            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
         }
 
-        .btn-primary {
-            background-color: #333333;
-            color: #FDFBF7;
-            border: 2px solid #333333;
+        .btn {
+            border: 2px solid #333;
             border-radius: 10px;
-            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
-            transition: all 0.15s ease;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.15s;
+            font-weight: bold;
         }
 
-        .btn-primary:hover {
+        .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.3);
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
         }
 
-        .btn-primary:disabled {
+        .btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
 
-        .btn-secondary {
-            background-color: #B9F0F0;
-            color: #333333;
-            border: 2px solid #333333;
-            border-radius: 10px;
-            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
-            transition: all 0.15s ease;
+        .btn-dark {
+            background: #333;
+            color: #fff;
         }
 
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        .btn-blue {
+            background: #B9F0F0;
+            color: #333;
         }
 
         .input-field {
-            border: 2px solid #333333;
+            border: 2px solid #333;
             border-radius: 10px;
-            background-color: #B9F0F0;
+            background: #B9F0F0;
         }
 
         .input-field:focus {
@@ -87,39 +60,10 @@
         }
 
         .select-field {
-            border: 2px solid #333333;
+            border: 2px solid #333;
             border-radius: 8px;
-            background-color: #FFF7AE;
+            background: #FFF7AE;
             cursor: pointer;
-        }
-
-        @keyframes bounce-in {
-            0% {
-                transform: scale(0.9);
-                opacity: 0;
-            }
-
-            50% {
-                transform: scale(1.02);
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .bounce-in {
-            animation: bounce-in 0.3s ease-out;
-        }
-
-        .keyword-tag {
-            background-color: #B9F0F0;
-            border: 1px solid #333;
-            border-radius: 20px;
-            padding: 4px 12px;
-            font-size: 12px;
-            font-weight: 600;
         }
 
         .platform-btn {
@@ -132,126 +76,121 @@
             text-decoration: none;
             color: white;
             border: 2px solid #333;
-            transition: all 0.15s ease;
+            transition: all 0.15s;
         }
 
         .platform-btn:hover {
             transform: translateY(-2px);
             box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
         }
+
+        @keyframes bounce {
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .bounce {
+            animation: bounce 0.3s ease-out;
+        }
     </style>
 </head>
 
-<body class="bg-paper-base font-body text-text-dark antialiased">
-    <div class="min-h-screen flex flex-col">
-        <div class="flex-1 flex flex-col items-center justify-center px-4 py-6">
-            <div class="w-full max-w-lg">
+<body class="text-gray-800 antialiased">
+    <div class="min-h-screen flex flex-col items-center justify-center px-4 py-6">
+        <div class="w-full max-w-lg">
 
-                <!-- Title Card -->
-                <div class="card bg-note-pink p-4 mb-4 text-center">
-                    <h1 class="text-xl font-extrabold text-text-dark">🎬 Video Downloader Pro</h1>
-                    <p class="text-xs text-text-muted">Tải video + Tìm bằng ảnh AI</p>
-                </div>
+            <!-- Title -->
+            <div class="card bg-pink-200 p-4 mb-4 text-center">
+                <h1 class="text-xl font-extrabold">🎬 Video Downloader Pro</h1>
+                <p class="text-xs text-gray-600">Tải video + Tìm bằng ảnh AI</p>
+            </div>
 
-                <!-- Download Form Card -->
-                <div class="card bg-white p-4 mb-4">
-                    <div class="mb-3">
-                        <label class="block text-sm font-semibold mb-1">🔗 Link Video</label>
-                        <input id="videoUrl" type="text" class="input-field w-full h-10 px-3 text-sm"
-                            placeholder="Dán link video vào đây..." />
+            <!-- Download Form -->
+            <div class="card bg-white p-4 mb-4">
+                <label class="block text-sm font-semibold mb-1">🔗 Link Video</label>
+                <input id="videoUrl" type="text" class="input-field w-full h-10 px-3 text-sm mb-3"
+                    placeholder="Dán link video vào đây..." />
+
+                <div class="flex gap-2 mb-3">
+                    <div class="flex-1">
+                        <label class="block text-xs font-semibold mb-1">📺 Chất lượng</label>
+                        <select id="qualitySelect" class="select-field w-full h-8 px-2 text-xs">
+                            <option value="best">Cao nhất</option>
+                            <option value="1080">1080p</option>
+                            <option value="720" selected>720p</option>
+                            <option value="480">480p</option>
+                        </select>
                     </div>
-
-                    <div class="flex gap-2 mb-3">
-                        <div class="flex-1">
-                            <label class="block text-xs font-semibold mb-1">📺 Chất lượng</label>
-                            <select id="qualitySelect" class="select-field w-full h-8 px-2 text-xs">
-                                <option value="best">Cao nhất</option>
-                                <option value="1080">1080p</option>
-                                <option value="720" selected>720p</option>
-                                <option value="480">480p</option>
-                            </select>
-                        </div>
-                        <div class="flex-1">
-                            <label class="block text-xs font-semibold mb-1">📁 Định dạng</label>
-                            <select id="formatSelect" class="select-field w-full h-8 px-2 text-xs">
-                                <option value="video" selected>Video (MP4)</option>
-                                <option value="audio">Audio (MP3)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button id="downloadBtn" onclick="handleDownload()"
-                        class="btn-primary w-full h-11 text-sm font-bold">
-                        <span id="btnText">📥 Tải Xuống</span>
-                    </button>
-
-                    <div id="statusBox" class="hidden mt-2 p-2 rounded-lg text-center text-xs font-medium bounce-in">
-                        <span id="statusText"></span>
+                    <div class="flex-1">
+                        <label class="block text-xs font-semibold mb-1">📁 Định dạng</label>
+                        <select id="formatSelect" class="select-field w-full h-8 px-2 text-xs">
+                            <option value="video" selected>Video (MP4)</option>
+                            <option value="audio">Audio (MP3)</option>
+                        </select>
                     </div>
                 </div>
 
-                <!-- AI Image Search Card -->
-                <div class="card bg-note-yellow p-4 mb-4">
-                    <div class="text-center mb-3">
-                        <h2 class="text-base font-bold">🤖 Tìm Video Bằng Ảnh (AI)</h2>
-                        <p class="text-xs text-text-muted">Upload ảnh → Gemini AI phân tích → Tìm video!</p>
-                    </div>
+                <button id="downloadBtn" onclick="handleDownload()" class="btn btn-dark w-full h-11 text-sm">
+                    <span id="btnText">📥 Tải Xuống</span>
+                </button>
+                <div id="statusBox" class="hidden mt-2 p-2 rounded-lg text-center text-xs font-medium bounce"></div>
+            </div>
 
-                    <div class="mb-3">
-                        <label for="imageUpload" class="block w-full cursor-pointer">
-                            <div id="uploadArea"
-                                class="border-2 border-dashed border-text-dark rounded-lg p-3 text-center hover:bg-yellow-100 transition-colors">
-                                <div id="uploadPlaceholder">
-                                    <span class="text-xl">📷</span>
-                                    <p class="text-sm font-medium">Nhấn để chọn ảnh</p>
-                                </div>
-                                <div id="uploadPreview" class="hidden">
-                                    <img id="previewImg" src="" alt="Preview" class="max-h-20 mx-auto rounded-lg">
-                                    <p id="fileName" class="text-xs mt-1 font-medium"></p>
-                                </div>
-                            </div>
-                        </label>
-                        <input type="file" id="imageUpload" accept="image/*" class="hidden"
-                            onchange="handleImageSelect(event)">
-                    </div>
-
-                    <button id="aiSearchBtn" onclick="handleAISearch()"
-                        class="btn-secondary w-full h-10 text-sm font-bold">
-                        <span id="aiSearchText">🔍 Tìm Video</span>
-                    </button>
-
-                    <!-- AI Results -->
-                    <div id="aiResultBox" class="hidden mt-3 bounce-in">
-                        <div class="bg-white p-3 rounded-lg border-2 border-text-dark mb-3">
-                            <p class="text-xs font-semibold mb-1">📝 Mô tả:</p>
-                            <p id="aiDescription" class="text-sm text-text-muted mb-2"></p>
-                            <p class="text-xs font-semibold mb-1">🔑 Từ khóa:</p>
-                            <div id="aiKeywords" class="flex flex-wrap gap-1"></div>
-                        </div>
-
-                        <!-- 3 Platform Buttons -->
-                        <p class="text-xs font-semibold mb-2">🔍 Tìm video trên:</p>
-                        <div class="flex flex-col gap-2">
-                            <a id="youtubeSearchLink" href="#" target="_blank" class="platform-btn"
-                                style="background-color:#FF0000;">
-                                ▶️ YouTube
-                            </a>
-                            <a id="tiktokSearchLink" href="#" target="_blank" class="platform-btn"
-                                style="background-color:#000000;">
-                                🎵 TikTok
-                            </a>
-                            <a id="facebookSearchLink" href="#" target="_blank" class="platform-btn"
-                                style="background-color:#1877F2;">
-                                📘 Facebook
-                            </a>
-                        </div>
-                    </div>
+            <!-- AI Search -->
+            <div class="card bg-yellow-100 p-4 mb-4">
+                <div class="text-center mb-3">
+                    <h2 class="text-base font-bold">🤖 Tìm Video Bằng Ảnh (AI)</h2>
+                    <p class="text-xs text-gray-600">Upload screenshot → AI tìm video!</p>
                 </div>
 
-                <!-- Footer -->
-                <div class="card bg-note-green p-2 text-center">
-                    <p class="text-xs font-semibold">Hỗ trợ: YouTube • TikTok • Facebook</p>
+                <label for="imageUpload" class="block w-full cursor-pointer mb-3">
+                    <div id="uploadArea"
+                        class="border-2 border-dashed border-gray-800 rounded-lg p-3 text-center hover:bg-yellow-200 transition">
+                        <div id="uploadPlaceholder">
+                            <span class="text-xl">📷</span>
+                            <p class="text-sm font-medium">Nhấn để chọn ảnh</p>
+                        </div>
+                        <div id="uploadPreview" class="hidden">
+                            <img id="previewImg" src="" alt="Preview" class="max-h-20 mx-auto rounded-lg">
+                            <p id="fileName" class="text-xs mt-1 font-medium"></p>
+                        </div>
+                    </div>
+                </label>
+                <input type="file" id="imageUpload" accept="image/*" class="hidden" onchange="handleImageSelect(event)">
+
+                <button id="aiSearchBtn" onclick="handleAISearch()" class="btn btn-blue w-full h-10 text-sm">
+                    <span id="aiSearchText">🔍 Tìm Video</span>
+                </button>
+
+                <!-- AI Results - Chỉ tên kênh + tiêu đề -->
+                <div id="aiResultBox" class="hidden mt-3 bounce">
+                    <div class="bg-white p-3 rounded-lg border-2 border-gray-800 mb-3">
+                        <p id="aiUsername" class="text-base font-bold text-blue-600"></p>
+                        <p id="aiVideoTitle" class="text-sm text-gray-700"></p>
+                    </div>
+
+                    <p class="text-xs font-semibold mb-2">🔍 Tìm video trên:</p>
+                    <div class="flex flex-col gap-2">
+                        <a id="youtubeSearchLink" href="#" target="_blank" class="platform-btn"
+                            style="background:#FF0000;">▶️ YouTube</a>
+                        <a id="tiktokSearchLink" href="#" target="_blank" class="platform-btn"
+                            style="background:#000;">🎵 TikTok</a>
+                        <a id="facebookSearchLink" href="#" target="_blank" class="platform-btn"
+                            style="background:#1877F2;">📘 Facebook</a>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="card bg-green-200 p-2 text-center">
+                <p class="text-xs font-semibold">Hỗ trợ: YouTube • TikTok • Facebook</p>
             </div>
         </div>
     </div>
@@ -259,19 +198,16 @@
     <script>
         let selectedFile = null;
 
-        function showStatus(message, isError = false) {
-            const statusBox = document.getElementById('statusBox');
-            const statusText = document.getElementById('statusText');
-            statusBox.classList.remove('hidden', 'bg-note-green', 'bg-note-pink');
-            statusBox.classList.add(isError ? 'bg-note-pink' : 'bg-note-green');
-            statusText.textContent = message;
+        function showStatus(msg, isError = false) {
+            const box = document.getElementById('statusBox');
+            box.classList.remove('hidden', 'bg-green-200', 'bg-red-200');
+            box.classList.add(isError ? 'bg-red-200' : 'bg-green-200');
+            box.textContent = msg;
         }
 
-        function setButtonState(loading, text) {
-            const btn = document.getElementById('downloadBtn');
-            const btnText = document.getElementById('btnText');
-            btn.disabled = loading;
-            btnText.textContent = text;
+        function setBtn(loading, text) {
+            document.getElementById('downloadBtn').disabled = loading;
+            document.getElementById('btnText').textContent = text;
         }
 
         function detectPlatform(url) {
@@ -287,50 +223,43 @@
             const format = document.getElementById('formatSelect').value;
 
             if (!url) { showStatus('❌ Vui lòng dán link video!', true); return; }
-
             const platform = detectPlatform(url);
             if (!platform) { showStatus('❌ Link không hợp lệ!', true); return; }
 
-            setButtonState(true, `⏳ Đang tải...`);
-            showStatus(`🔄 Đang xử lý...`);
+            setBtn(true, '⏳ Đang tải...');
+            showStatus('🔄 Đang xử lý...');
 
             try {
-                const apiEndpoint = `/download/${platform}?url=${encodeURIComponent(url)}&quality=${quality}&format=${format}`;
-                const response = await fetch(apiEndpoint);
-                const contentType = response.headers.get('content-type');
+                const res = await fetch(`/download/${platform}?url=${encodeURIComponent(url)}&quality=${quality}&format=${format}`);
+                const contentType = res.headers.get('content-type');
 
                 if (contentType && contentType.includes('application/json')) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || 'Không thể tải');
+                    const err = await res.json();
+                    throw new Error(err.error || 'Không thể tải');
                 }
 
-                const blob = await response.blob();
+                const blob = await res.blob();
                 if (blob.size === 0) throw new Error('Không nhận được dữ liệu');
 
-                const downloadUrl = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
-                a.href = downloadUrl;
+                a.href = URL.createObjectURL(blob);
                 a.download = `${platform}_${quality}.${format === 'audio' ? 'mp3' : 'mp4'}`;
-                document.body.appendChild(a);
                 a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(downloadUrl);
+                URL.revokeObjectURL(a.href);
 
-                setButtonState(false, '✅ Thành công!');
+                setBtn(false, '✅ Thành công!');
                 showStatus('🎉 Đã tải xong!');
-                setTimeout(() => setButtonState(false, '📥 Tải Xuống'), 3000);
-
-            } catch (error) {
-                setButtonState(false, '❌ Thử lại');
-                showStatus(`😢 ${error.message}`, true);
-                setTimeout(() => setButtonState(false, '📥 Tải Xuống'), 3000);
+                setTimeout(() => setBtn(false, '📥 Tải Xuống'), 3000);
+            } catch (e) {
+                setBtn(false, '❌ Thử lại');
+                showStatus('😢 ' + e.message, true);
+                setTimeout(() => setBtn(false, '📥 Tải Xuống'), 3000);
             }
         }
 
-        function handleImageSelect(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            if (!file.type.startsWith('image/')) { alert('Vui lòng chọn file ảnh!'); return; }
+        function handleImageSelect(e) {
+            const file = e.target.files[0];
+            if (!file || !file.type.startsWith('image/')) return;
 
             selectedFile = file;
             document.getElementById('uploadPlaceholder').classList.add('hidden');
@@ -338,7 +267,7 @@
             document.getElementById('fileName').textContent = file.name;
 
             const reader = new FileReader();
-            reader.onload = (e) => { document.getElementById('previewImg').src = e.target.result; };
+            reader.onload = (ev) => { document.getElementById('previewImg').src = ev.target.result; };
             reader.readAsDataURL(file);
             document.getElementById('aiResultBox').classList.add('hidden');
         }
@@ -355,54 +284,40 @@
                 const formData = new FormData();
                 formData.append('image', selectedFile);
 
-                const response = await fetch('/ai/search', { method: 'POST', body: formData });
-                const result = await response.json();
+                const res = await fetch('/ai/search', { method: 'POST', body: formData });
+                const result = await res.json();
 
                 if (!result.success) throw new Error(result.error || 'Lỗi AI');
 
-                // Show AI description and keywords
-                document.getElementById('aiDescription').textContent = result.data.description;
+                const data = result.data;
 
-                const keywordsDiv = document.getElementById('aiKeywords');
-                keywordsDiv.innerHTML = '';
-                result.data.keywords.forEach(keyword => {
-                    const tag = document.createElement('span');
-                    tag.className = 'keyword-tag';
-                    tag.textContent = keyword;
-                    keywordsDiv.appendChild(tag);
-                });
+                // Chỉ hiển thị tên kênh + tiêu đề
+                document.getElementById('aiUsername').textContent = data.username ? '👤 ' + data.username : '';
+                document.getElementById('aiVideoTitle').textContent = data.videoTitle ? '📌 ' + data.videoTitle : data.description;
 
-                // Set platform links
-                document.getElementById('youtubeSearchLink').href = result.data.youtubeUrl;
-                document.getElementById('tiktokSearchLink').href = result.data.tiktokUrl;
-                document.getElementById('facebookSearchLink').href = result.data.facebookUrl;
-
+                document.getElementById('youtubeSearchLink').href = data.youtubeUrl;
+                document.getElementById('tiktokSearchLink').href = data.tiktokUrl;
+                document.getElementById('facebookSearchLink').href = data.facebookUrl;
                 document.getElementById('aiResultBox').classList.remove('hidden');
 
                 btn.disabled = false;
                 btnText.textContent = '✅ Hoàn thành!';
                 setTimeout(() => { btnText.textContent = '🔍 Tìm Video'; }, 2000);
-
-            } catch (error) {
+            } catch (e) {
                 btn.disabled = false;
                 btnText.textContent = '❌ Lỗi!';
-                alert('Lỗi: ' + error.message);
+                alert('Lỗi: ' + e.message);
                 setTimeout(() => { btnText.textContent = '🔍 Tìm Video'; }, 2000);
             }
         }
 
         document.getElementById('videoUrl').addEventListener('keypress', (e) => { if (e.key === 'Enter') handleDownload(); });
-
         document.getElementById('formatSelect').addEventListener('change', (e) => {
-            const qualitySelect = document.getElementById('qualitySelect');
-            if (e.target.value === 'audio') {
-                qualitySelect.innerHTML = '<option value="320">320kbps</option><option value="192" selected>192kbps</option><option value="128">128kbps</option>';
-            } else {
-                qualitySelect.innerHTML = '<option value="best">Cao nhất</option><option value="1080">1080p</option><option value="720" selected>720p</option><option value="480">480p</option>';
-            }
+            const q = document.getElementById('qualitySelect');
+            q.innerHTML = e.target.value === 'audio'
+                ? '<option value="320">320kbps</option><option value="192" selected>192kbps</option><option value="128">128kbps</option>'
+                : '<option value="best">Cao nhất</option><option value="1080">1080p</option><option value="720" selected>720p</option><option value="480">480p</option>';
         });
-
-        console.log('🎬 Video Downloader Pro Ready!');
     </script>
 </body>
 

@@ -61,15 +61,27 @@ app.post('/ai/search', upload.single('image'), async (req, res) => {
         // Use Gemini Vision to analyze image
         const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
 
-        const prompt = `Analyze this image and provide:
-1. A short description of what's in the image (in Vietnamese)
-2. 3-5 YouTube search keywords that would find videos related to this image content
+        const prompt = `Phân tích ảnh screenshot video từ YouTube Shorts, TikTok, hoặc Facebook Reels.
 
-Respond in JSON format:
+NHIỆM VỤ: Tìm và trích xuất CHÍNH XÁC:
+1. TÊN KÊNH/TÊN NGƯỜI ĐĂNG (có thể có @ hoặc không có @)
+   - YouTube: thường có @username
+   - TikTok: thường có @username  
+   - Facebook: CHỈ CÓ TÊN, KHÔNG CÓ @ (ví dụ: "Khánh Trần Ati")
+   
+2. TIÊU ĐỀ VIDEO (dòng text mô tả video, thường ở dưới cùng)
+
+Trả về JSON (CHỈ JSON, không có text khác):
 {
-  "description": "mô tả ngắn bằng tiếng Việt",
-  "keywords": ["keyword1", "keyword2", "keyword3"]
-}`;
+  "username": "tên kênh chính xác như trong ảnh (có @ nếu có, không @ nếu không có)",
+  "videoTitle": "tiêu đề video chính xác như trong ảnh",
+  "keywords": ["tên kênh", "từ khóa từ tiêu đề"]
+}
+
+VÍ DỤ:
+- YouTube: {"username": "@MienTayTiVi", "videoTitle": "Máy cày NEW!", "keywords": ["MienTayTiVi", "máy cày"]}
+- Facebook: {"username": "Khánh Trần Ati", "videoTitle": "Khoan ngang Goodeng GS150-LS", "keywords": ["Khánh Trần Ati", "Goodeng GS150"]}
+- TikTok: {"username": "@username", "videoTitle": "tiêu đề", "keywords": ["username", "keyword"]}`;
 
         const result = await model.generateContent([
             prompt,
@@ -111,13 +123,15 @@ Respond in JSON format:
         res.json({
             success: true,
             data: {
+                isScreenshot: aiData.isScreenshot || false,
+                username: aiData.username || null,
+                videoTitle: aiData.videoTitle || null,
                 description: aiData.description,
                 keywords: aiData.keywords,
                 searchQuery: searchQuery,
                 youtubeUrl: youtubeSearchUrl,
                 tiktokUrl: tiktokSearchUrl,
-                facebookUrl: facebookSearchUrl,
-                youtubeVideos: [] // Will be filled by separate call
+                facebookUrl: facebookSearchUrl
             }
         });
 
