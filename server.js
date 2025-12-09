@@ -13,8 +13,8 @@ const path = require('path');
 const multer = require('multer');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-// Gemini AI Setup
-const GEMINI_API_KEY = 'AIzaSyByyOq9Vmevsrxk8tkICU2xktz6QRtE5l8';
+// Gemini AI Setup - dùng biến môi trường để bảo mật
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || 'YOUR_API_KEY_HERE';
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
 // Multer setup for file uploads
