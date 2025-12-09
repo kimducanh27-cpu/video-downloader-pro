@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Digital Scrapbook</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Coming+Soon&amp;family=Indie+Flower&amp;family=Nanum+Pen+Script&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Scrapbook palette: paper tones, muted brights for sticky notes
+              "paper-base": "#FDFBF7",
+              "paper-overlay-1": "#F0EAD6", // Lighter kraft paper
+              "paper-overlay-2": "#E6DBC9", // Medium kraft paper
+              "note-yellow": "#FFF7AE",
+              "note-pink": "#FFB3BA",
+              "note-green": "#B0E7BF",
+              "note-blue": "#B9F0F0",
+              "text-dark": "#333333", // Dark ink color
+              "text-muted": "#6B6B6B", // Lighter ink color
+            },
+            fontFamily: {
+              // Whimsical yet legible monospace-like font for body, more playful for headlines
+              "body": ["Coming Soon", "cursive"], // Whimsical for body
+              "headline": ["Permanent Marker", "cursive"], // Playful for headlines
+              "monospace": ["Fira Code", "monospace"] // Fallback or specific monospace use
+            },
+            borderRadius: {
+              "none": "0",
+              "scrapbook": "8px", // Slightly rounded corners for "torn paper" effect
+            },
+            boxShadow: {
+              "scrapbook-note": "3px 3px 0px rgba(0,0,0,0.4), 6px 6px 0px rgba(0,0,0,0.1)", // More pronounced, slightly uneven shadow
+            }
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+body {
+    background-color: var(--paper-base);
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAAPpP7oGLyH7rXYOqxhMDtsHUMk1GRxNaF2gFxG5rUL2R8mM6yF8OlJFPcRVvokwMTnDxQgGXdE2iTkZ4ctZbZ7mcUu0GNDorl4ckVf47fmpM3CroXmxzO2_Zm50Pa12hQhsf87usgtxl8MCFDhUqPeon0X3ggjpM-nPkdwfZcIWVURmTR69lfzCq6B0JHDbJWp9LkRs7WcMINz4HeRnlCOk8xlBjQYsOEjyioZs_3OZkcUeFaEz1C1aLmW4t-Uym7JmQbus-MmChP), url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzgiIGhlaWdodD0iODIiIHZpZXdCb3g9IjAgMCA3OCA4MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuNjE1MTcgNjkuMzA4QzQuOTg2ODkgNzUuNDcxNiAxMS40MjA5IDc2LjM0NzIgMTcuNzQ2MyA3Ni45OTU4QzMxLjczMDkgNzguNDIzNyA0Ni43OTk1IDgwLjM2NzcgNjEuMDUwNCA3OC43NTkyQzcxLjkwMDYgNzYuOTQzNyA3Ny42NDY5IDcwLjY5OTkgNzcuMjk3NSA2MC41OTczQzc2LjM1MjYgNDYuMzg2NSA3NC4yNjc1IDMxLjY1OTMgNzYuNjQyMSAxNy42Njk2Qzc3LjQ0MTQgMTMuMjY2OCA3NS44ODA0IDcuNjIxMDggNzIuMjcwMyA0LjcyMDUzQzY2Ljk1MjYgMC40MDM4NSA1Ny45ODIzIDAuNDMzNDkxIDQ5LjMxNjkgMC44MTExMjRDNDEuNTQ2MiAxLjExNDI2IDMzLjE3MzcgMS4yOTQ2MiAyNC44ODUgMC42NDcyNjZDMTkuMzg1MiAwLjIyNDcyOCAxMi40Mjc3IDAuMjcyMzUzIDYuOTA2ODkgMi43NzA1MUMyLjQ1NDc0IDQuODUzNzcgLTAuNjQ1MDU2IDEwLjI2ODMgMC4wNzQ3NDk0IDE2LjE0MDhDMi45Mjg2IDM3LjY1OTQgMi41MDExNiA1Ni45MjM1IDEuNjE1MTcgNjkuMzA4WiIgc3Ryb2tlPSIjRENEMDBFIiBzdHJva2Utb3BhY2l0eT0iMC41Ii8+Cjwvc3ZnPg=="), url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzciIGhlaWdodD0iNjgiIHZpZXdCb3g9IjAgMCA3NyA2OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuMjEwNzIgMi42Nzg4NkM5LjYwNjcxIC0zLjMwNDMyIDIwLjg1NDQgMC43MjI0OTggMjguOTE0OSA2LjY0MDYzQzMzLjUyMjcgOS41NzQ3NiAzNy4xNDY5IDEzLjY3NzUgMzkuOTU0MSAxNy43Mjc4QzQ3LjQ1NzMgMjguMjU0MiA1Mi4wMjEgNDEuMTA0MSA1Ny4zNjM1IDUxLjM2ODlDNjQuMzYxMiA2NC45MDk3IDY4LjE2NDkgNzYuODk5NiA3Ni4zMTQ2IDY0LjcyNTJDNzMuNzAyNSA2My41MzA5IDY5LjY4NzEgNjIuODE5IDY1LjUzOTkgNjIuNzcwMUM0Ny40MjQyIDYyLjI3ODUgMjguMTA3NCA2MS44MzMgOS43OTY3NCA2NC42MzQ4QzEuNDg1MjEgNjcuNDM2IDAuNjU2Mjg4IDU1LjMwOTggMC41MDA1NDkgNDQuMzcxOUMwLjAzMjIxMTcgMjkuOTQ1MiAwLjQ0MjQ1NyAxNi40OTI3IDEuMjEwNzIgMi42Nzg4NloiIHN0cm9rZT0iI0MxQzBDMCIgc3Ryb2tlLW9wYWNpdHk9IjAuNSIvPgo8L3N2Zz4="), url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzMiIGhlaWdodD0iNzMiIHZpZXdCb3g9IjAgMCA3MyA3MyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTM2LjQzNDkgMi40NjYwNEM0Mi4yMTg2IDYuNTgwNDMgNDcuOTcwOSA4LjE5MjMyIDUzLjQwMjYgMTEuMjAyMkM1OC41NDQgMTQuMDcxNyA2My40NDc5IDE3Ljg4NzYgNjYuNTE4MyAyMi44MDJDNjguMzc3OSAyNS41OTc0IDcwLjAzNzEgMjguMjM1OSA3MC45NzI1IDMxLjUyNzJDNzEuODExNCAzNC41MjgzIDcyLjMyNjQgMzcuNzU5NSA3Mi45NjkgNDEuMzQ1NUM3My42MTQ1IDQ0LjkzMTkgNzQuMzQ0MiA0OC40NTgyIDcxLjE2MDcgNTAuNzc4NkM2Ny45NzgyIDUyLjk2ODcgNjYuMzc3OSA1Ni42Njk2IDY0LjQ1MTYgNTkuNzQzNUM2Mi44NzI4IDYyLjE3MzkgNjEuMTc2MSA2NC41NTI3IDU5LjIzOTYgNjYuMTcwMUM1Ni41NzYyIDY4LjA2ODIgNTEuNTMxIDY5LjQ0NjQgNDYuODg0NCA3MC41M0M0Mi4yNzk3IDcxLjY2MDMgMzYuNzU2OSA3Mi41ODQ1IDMxLjc2MyA3Mi44MDYxQzI1LjY0NDYgNzMuMDI2NSAxOS45MDY5IDcyLjczOTcgMTQuNjI1MSA3MC43NTU2QzExLjk3NjYgNjkuODAyNiA5LjM5MDQxIDY4LjYwNjYgNi45NTUxMSA2Ny4wNjI0QzQuNjAzNjggNjUuNTE1MiAxLjg4NDU5IDY0LjM2MjQgMC42ODc0NDUgNjEuNjE0Qy0wLjUwOTcxMyA1OC44Njc3IDAuMzE2NjgyIDU2LjM4ODkgMC4zMTY2ODIgNTIuNTQxNEMwLjMxNjY4MiA0OS40OTk3IDAuMzE2NjgyIDQ2LjQ1ODUgMC40ODIzMTUgNDMuNDE3MUMwLjY1NzI3MSAzOS45MTIyIDAuODg1MDgzIDM2LjM2NzYgMS40NDQyMiAzMy4xMjE2QzIuMDAyODggMjkuODc0NCAyLjkwODE5IDI2LjkwNzcgMy45Mjk1NiAyNC4wMjk0QzUuNjA3NTEgMjAuMTk4MyA3LjkzMzYgMTYuNzcxMiAxMC43MTM4IDEzLjM1MzRDMTMuNzI2NyA5LjU4MDQzIDE3LjAwNjMgNi4xMTUzOSAyMC44Nzg1IDMuOTM1MjdDMjQuOTMxNiAxLjQ1NjQxIDMwLjIxNTMgMC40MjY1ODUgMzYuNDM0OSAyLjQ2NjA0WiIgc3Ryb2tlPSIjRTZEMkJFIiBzdHJva2Utb3BhY2l0eT0iMC41Ii8+Cjwvc3ZnPg==");
+    background-position: top left, 100px 50px, 200px 0, 300px 150px;background-size: 73px 73px, 78px 82px, 77px 68px, 73px 73px;background-repeat: repeat
+    }.scrapbook-note-base {
+    border: 2px solid var(--text-dark);border-radius: scrapbook;box-shadow: scrapbook-note;
+    transform: rotate(var(--rotation, 0deg));transition: transform 0.1s ease-out;}
+.scrapbook-note-base:hover {
+    transform: rotate(var(--rotation-hover, 0deg)) scale(1.02);}.scrapbook-note-yellow {
+    background-color: var(--note-yellow)
+    }
+.scrapbook-note-pink {
+    background-color: var(--note-pink)
+    }
+.scrapbook-note-green {
+    background-color: var(--note-green)
+    }
+.scrapbook-note-blue {
+    background-color: var(--note-blue)
+    }.icon-scrapbook {
+    fill: none;
+    stroke: var(--text-dark);
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round
+    }
+.icon-material {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    color: var(--text-dark)
+    }</style>
+</head>
+<body class="bg-paper-base font-body text-text-dark antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center px-4 py-5 sm:px-8 md:px-20 lg:px-40">
+<div class="layout-content-container flex w-full max-w-[960px] flex-1 flex-col">
+<header class="scrapbook-note-base scrapbook-note-yellow relative z-10 flex items-center justify-between whitespace-nowrap px-4 py-3 sm:px-6" style="--rotation: -2deg; --rotation-hover: -4deg; margin-top: 1rem; margin-left: -1rem; margin-bottom: 2rem;">
+<div class="flex items-center gap-4 text-text-dark">
+<div class="size-6 text-text-dark">
+<svg class="icon-scrapbook" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z"></path>
+</svg>
+</div>
+<h2 class="text-xl font-headline leading-tight tracking-normal text-text-dark">My Memory Catcher</h2>
+</div>
+<div class="hidden items-center gap-6 md:flex">
+<a class="text-sm font-body leading-normal text-text-muted hover:text-text-dark" href="#">How It Works</a>
+<a class="text-sm font-body leading-normal text-text-muted hover:text-text-dark" href="#">FAQs</a>
+<a class="text-sm font-body leading-normal text-text-muted hover:text-text-dark" href="#">Drop Me a Note</a>
+</div>
+</header>
+<main class="flex flex-1 flex-col items-center py-12 sm:py-20">
+<div class="w-full @container">
+<div class="@[480px]:p-4">
+<div class="relative flex min-h-[480px] flex-col items-center justify-center gap-6 p-4 @[480px]:gap-8">
+<div class="scrapbook-note-base scrapbook-note-pink relative z-0 flex flex-col gap-2 p-6 text-center" style="--rotation: 1deg; --rotation-hover: 3deg; margin-top: -3rem; margin-right: -2rem;">
+<h1 class="font-headline text-4xl leading-tight tracking-normal text-text-dark @[480px]:text-5xl">
+                                            Got a video memory? Jot it down!
+                                        </h1>
+<h2 class="text-base font-body leading-normal text-text-muted @[480px]:text-lg">
+                                            Quickly save those special clips from anywhere!
+                                        </h2>
+</div>
+<label class="scrapbook-note-base scrapbook-note-blue relative z-10 flex h-14 w-full max-w-[580px] flex-col @[480px]:h-16" style="--rotation: -3deg; --rotation-hover: -5deg;">
+<div class="flex h-full w-full flex-1 items-stretch">
+<div class="flex items-center justify-center border-r-2 border-text-dark bg-note-blue pl-[15px] text-text-muted">
+<span class="material-symbols-outlined icon-material">link</span>
+</div>
+<input class="form-input h-full min-w-0 flex-1 resize-none overflow-hidden border-none bg-note-blue px-2 pl-2 pr-2 text-base font-body leading-normal text-text-dark placeholder:text-text-muted focus:outline-0 focus:ring-0 @[480px]:text-lg" placeholder="Paste your video link here, friend!" value=""/>
+<div class="flex items-center justify-center border-l-2 border-text-dark bg-note-blue pr-[7px]">
+<button class="scrapbook-note-base h-10 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden bg-text-dark px-4 text-base font-body leading-normal tracking-normal text-paper-base" style="--rotation: 0deg; --rotation-hover: 0deg; transform: none; border-radius: scrapbook;">
+<span class="truncate">Add to Scrapbook!</span>
+</button>
+</div>
+</div>
+</label>
+</div>
+</div>
+</div>
+<div class="mt-16 w-full max-w-2xl text-center sm:mt-24">
+<h4 class="scrapbook-note-base scrapbook-note-green relative z-0 inline-block px-4 py-2 text-sm font-headline uppercase leading-normal tracking-widest text-text-dark" style="--rotation: 2deg; --rotation-hover: 4deg; margin-left: 1rem; margin-bottom: 2rem;">Where the magic happens</h4>
+<div class="mt-6 flex flex-wrap items-center justify-center gap-8 px-4 sm:gap-12 md:gap-16">
+<div class="flex flex-col items-center gap-2">
+<svg aria-hidden="true" class="h-10 w-10" viewBox="0 0 24 24">
+<path class="icon-scrapbook" d="M19.802 5.378a3.002 3.002 0 00-2.12-2.122C16.142 3 12 3 12 3s-4.142 0-5.682.256A3.002 3.002 0 004.198 5.378C3.942 6.919 3.942 12 3.942 12s0 5.081.256 6.622a3.002 3.002 0 002.122 2.12c1.54.257 5.682.257 5.682.257s4.142 0 5.682-.257a3.002 3.002 0 002.12-2.12C20.058 17.081 20.058 12 20.058 12s0-5.081-.256-6.622zM9.898 15.6V8.4l6.262 3.6-6.262 3.6z"></path>
+</svg>
+<span class="text-lg font-body font-semibold text-text-dark">YouTube</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<svg aria-hidden="true" class="h-10 w-10" viewBox="0 0 24 24">
+<path class="icon-scrapbook" d="M12 2.5a9.5 9.5 0 00-6.177 16.634.5.5 0 01-.194.275c-.313.2-.626.401-.94.602-.313.2-.437.35-.437.525 0 .175.125.325.438.525.312.2.625.4.938.6.025.012.05.025.075.037.15.076.3.15.462.226a.5.5 0 01.187.287A9.505 9.505 0 1012 2.5zm1.5-1.125a.5.5 0 01.5.5v10.1a.5.5 0 01-.5.5h-4a.5.5 0 01-.5-.5V1.875a.5.5 0 01.5-.5h4z"></path>
+</svg>
+<span class="text-lg font-body font-semibold text-text-dark">TikTok</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<svg aria-hidden="true" class="h-10 w-10" viewBox="0 0 24 24">
+<path class="icon-scrapbook" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+</svg>
+<span class="text-lg font-body font-semibold text-text-dark">Facebook</span>
+</div>
+</div>
+</div>
+</main>
+<footer class="scrapbook-note-base scrapbook-note-yellow relative z-0 flex flex-col gap-6 px-5 py-10 text-center @container" style="--rotation: -1deg; --rotation-hover: -3deg; margin-top: 4rem; margin-right: -1rem;">
+<div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 @[480px]:flex-row @[480px]:justify-center">
+<a class="min-w-40 text-sm font-body leading-normal text-text-muted hover:text-text-dark" href="#">Secret Notes</a>
+<a class="min-w-40 text-sm font-body leading-normal text-text-muted hover:text-text-dark" href="#">My Private Journal</a>
+</div>
+<p class="text-sm font-body leading-normal text-text-muted">© 2024 Memory Catcher. All rights reserved, doodled by hand.</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>
