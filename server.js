@@ -240,20 +240,23 @@ app.get('/download/youtube', async (req, res) => {
                 url
             ];
         } else {
-            // Video - use simpler format selection for better compatibility
-            // Ưu tiên format đã có sẵn video+audio để không cần merge
-            let formatString = 'best[ext=mp4]/best';
+            // Video - sử dụng format string để đảm bảo chất lượng cao
+            // Luôn ưu tiên merge bestvideo+bestaudio để có chất lượng tốt nhất
+            let formatString = 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio/best';
 
             if (quality === 'best') {
-                formatString = 'best[ext=mp4]/bestvideo+bestaudio/best';
+                // Tải chất lượng cao nhất có thể
+                formatString = 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio/best';
             } else if (quality === '1080') {
-                formatString = 'best[height<=1080][ext=mp4]/best[height<=1080]/best';
+                // Ưu tiên 1080p chính xác, fallback về gần nhất
+                formatString = 'bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height=1080]+bestaudio/bestvideo[height<=1080][ext=mp4]+bestaudio/best[height<=1080]';
             } else if (quality === '720') {
-                formatString = 'best[height<=720][ext=mp4]/best[height<=720]/best';
+                // Ưu tiên 720p chính xác, fallback về gần nhất
+                formatString = 'bestvideo[height=720][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height=720]+bestaudio/bestvideo[height<=720][ext=mp4]+bestaudio/best[height<=720]';
             } else if (quality === '480') {
-                formatString = 'best[height<=480][ext=mp4]/best[height<=480]/best';
+                formatString = 'bestvideo[height=480][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height=480]+bestaudio/bestvideo[height<=480][ext=mp4]+bestaudio/best[height<=480]';
             } else if (quality === '360') {
-                formatString = 'best[height<=360][ext=mp4]/best[height<=360]/best';
+                formatString = 'bestvideo[height=360][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height=360]+bestaudio/bestvideo[height<=360][ext=mp4]+bestaudio/best[height<=360]';
             }
 
             ytdlpArgs = [
