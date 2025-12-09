@@ -145,6 +145,89 @@ VÍ DỤ:
 });
 
 // ============================================
+// ROUTE: AI Image Search from URL (for Discord Bot)
+// ============================================
+app.post('/ai/search-url', async (req, res) => {
+    try {
+        const { imageUrl } = req.body;
+
+        if (!imageUrl) {
+            return res.status(400).json({
+                success: false,
+                error: 'Cần imageUrl!'
+            });
+        }
+
+        console.log('🤖 AI đang phân tích ảnh từ URL:', imageUrl);
+
+        // Download image from URL
+        const imageResponse = await axios.get(imageUrl, {
+            responseType: 'arraybuffer',
+            timeout: 15000
+        });
+
+        const imageBase64 = Buffer.from(imageResponse.data).toString('base64');
+        const mimeType = imageResponse.headers['content-type'] || 'image/jpeg';
+
+        // Use Gemini Vision to analyze image
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
+
+        const prompt = `Phân tích ảnh screenshot video từ YouTube Shorts, TikTok, hoặc Facebook Reels.
+
+NHIỆM VỤ: Tìm và trích xuất CHÍNH XÁC:
+1. TÊN KÊNH/TÊN NGƯỜI ĐĂNG (có thể có @ hoặc không có @)
+2. TIÊU ĐỀ VIDEO (dòng text mô tả video)
+
+Trả về JSON (CHỈ JSON, không có text khác):
+{
+  "username": "tên kênh chính xác",
+  "videoTitle": "tiêu đề video", 
+  "keywords": ["tên kênh", "từ khóa"]
+}`;
+
+        const result = await model.generateContent([
+            prompt,
+            {
+                inlineData: {
+                    mimeType: mimeType,
+                    data: imageBase64
+                }
+            }
+        ]);
+
+        const responseText = result.response.text();
+        console.log('Gemini response:', responseText);
+
+        // Parse JSON from response
+        let aiData;
+        try {
+            const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+            if (jsonMatch) {
+                aiData = JSON.parse(jsonMatch[0]);
+            } else {
+                throw new Error('No JSON found');
+            }
+        } catch (e) {
+            aiData = { keywords: ['video'] };
+        }
+
+        res.json({
+            success: true,
+            username: aiData.username || null,
+            videoTitle: aiData.videoTitle || null,
+            keywords: aiData.keywords || ['video']
+        });
+
+    } catch (error) {
+        console.error('AI Search URL Error:', error.message);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// ============================================
 // ROUTE: YouTube Search API - Get video list with thumbnails
 // ============================================
 app.get('/api/youtube/search', async (req, res) => {
