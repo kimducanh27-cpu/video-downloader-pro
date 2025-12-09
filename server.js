@@ -58,40 +58,38 @@ app.post('/ai/search', upload.single('image'), async (req, res) => {
         const imageBase64 = req.file.buffer.toString('base64');
         const mimeType = req.file.mimetype;
 
-        // Use Gemini Vision to analyze image
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
+        // Fallback models - tự động chuyển khi hết token
+        const models = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-robotics-er-1.5-preview'];
+        let result = null;
+        let lastError = null;
 
-        const prompt = `Phân tích ảnh screenshot video từ YouTube Shorts, TikTok, hoặc Facebook Reels.
+        const prompt = `Phân tích ảnh. Trả về JSON: {"username": "tên kênh", "videoTitle": "tiêu đề", "keywords": ["từ khóa"]}`;
 
-NHIỆM VỤ: Tìm và trích xuất CHÍNH XÁC:
-1. TÊN KÊNH/TÊN NGƯỜI ĐĂNG (có thể có @ hoặc không có @)
-   - YouTube: thường có @username
-   - TikTok: thường có @username  
-   - Facebook: CHỈ CÓ TÊN, KHÔNG CÓ @ (ví dụ: "Khánh Trần Ati")
-   
-2. TIÊU ĐỀ VIDEO (dòng text mô tả video, thường ở dưới cùng)
+        for (const modelName of models) {
+            try {
+                console.log('[AI Search] Trying model:', modelName);
+                const model = genAI.getGenerativeModel({ model: modelName });
 
-Trả về JSON (CHỈ JSON, không có text khác):
-{
-  "username": "tên kênh chính xác như trong ảnh (có @ nếu có, không @ nếu không có)",
-  "videoTitle": "tiêu đề video chính xác như trong ảnh",
-  "keywords": ["tên kênh", "từ khóa từ tiêu đề"]
-}
-
-VÍ DỤ:
-- YouTube: {"username": "@MienTayTiVi", "videoTitle": "Máy cày NEW!", "keywords": ["MienTayTiVi", "máy cày"]}
-- Facebook: {"username": "Khánh Trần Ati", "videoTitle": "Khoan ngang Goodeng GS150-LS", "keywords": ["Khánh Trần Ati", "Goodeng GS150"]}
-- TikTok: {"username": "@username", "videoTitle": "tiêu đề", "keywords": ["username", "keyword"]}`;
-
-        const result = await model.generateContent([
-            prompt,
-            {
-                inlineData: {
-                    mimeType: mimeType,
-                    data: imageBase64
-                }
+                result = await model.generateContent([
+                    prompt,
+                    {
+                        inlineData: {
+                            mimeType: mimeType,
+                            data: imageBase64
+                        }
+                    }
+                ]);
+                console.log('[AI Search] Model', modelName, 'succeeded');
+                break;
+            } catch (modelError) {
+                console.log('[AI Search] Model', modelName, 'failed:', modelError.message);
+                lastError = modelError;
             }
-        ]);
+        }
+
+        if (!result) {
+            throw lastError || new Error('All models failed');
+        }
 
         const responseText = result.response.text();
         console.log('Gemini response:', responseText);
